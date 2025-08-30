@@ -2,22 +2,22 @@ package org.example;
 
 public class Personagem {
     //atributos
-    String nome;
-    int vida;
-    int ataque;
+   private String nome;
+   private int vida;
+   private int ataque;
 
     //métodos
     public void receberDano(int ataque){
-        if(this.vida > 0){
-            this.vida = this.vida - ataque;
-        }else{
-            System.out.println("Personagem derrotado!");
+        this.vida -= ataque;
+        if (this.vida <= 0){
+            this.vida = 0;
+            System.out.println("Personagem derrotado");
         }
     }
 
     public void atacar(Personagem alvo){
         if (alvo.vida > 0) {
-            this.receberDano(this.ataque);
+            alvo.receberDano(this.ataque);
         }else{
             System.out.println("Ataque falhou!");
         }
@@ -30,5 +30,13 @@ public class Personagem {
 
     void setVida(int vida){
         this.vida = vida;
+    }
+
+    void setAtaque(int ataque ) {
+        this.ataque = ataque;
+    }
+
+    int getVida(){
+        return this.vida;
     }
 }
