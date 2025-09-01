@@ -1,7 +1,5 @@
 package ex02;
 
-import org.example.Personagem;
-
 import java.util.ArrayList;
 
 

@@ -1,4 +1,4 @@
-package org.example;
+package ex01;
 
 public class Personagem {
     //atributos
