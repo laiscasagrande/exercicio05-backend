@@ -3,7 +3,7 @@ package ex05;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Cinema cinema = new Cinema();
 
         Filme filme01 = new Filme();
@@ -32,6 +32,7 @@ public class Main {
 
         System.out.print("Insira a idade do cliente: ");
         int idadeCliente = scanner.nextInt();
+        scanner.nextLine();
 
         Cliente cliente = new Cliente(nomeCliente, idadeCliente);
 
@@ -44,5 +45,6 @@ public class Main {
         int numero = Integer.parseInt(assento.substring(1));
 
         Ingresso ingresso = new Ingresso(cliente, filme01, fileira, numero);
+        cinema.ingressosVendidos[0] = ingresso;
     }
  }

@@ -4,5 +4,25 @@ import java.util.ArrayList;
 
 public class Cinema {
     ArrayList<Filme> filmesDisponiveis = new ArrayList<>();
-    String[] ingressosVendidos = new String[5];
+    ArrayList<Ingresso> ingressosVendidos = new ArrayList<>();
+
+    void adicionarFilme(Filme filme){
+        filmesDisponiveis.add(filme);
+    }
+
+    void venderIngresso(Cliente cliente, Filme filme, char fileira, int numero) throws Exception {
+        String assento = fileira + String.valueOf(numero);
+
+        for (Ingresso ingresso : ingressosVendidos){
+            if (ingresso.assento.equals(assento)){
+                throw new Exception("Assento já está ocupado!");
+            }
+        }
+
+        Ingresso ingresso = new Ingresso(cliente, filme, fileira, numero); //assim que eu chamar esse metodo de vender ingresso, ele já vai passar as informações necessárias para classe Ingresso
+
+        ingressosVendidos.add(ingresso);
+
+        System.out.println("Ingresso vendido com sucesso!");
+    }
 }
