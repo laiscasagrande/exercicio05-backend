@@ -10,6 +10,15 @@ public class Cinema {
         filmesDisponiveis.add(filme);
     }
 
+    Filme buscarFilme(String nome){
+        for (Filme filme : filmesDisponiveis){
+            if (filme.nome.equals(nome)){
+                return filme;
+            }
+        }
+        return null;
+    }
+
     void venderIngresso(Cliente cliente, Filme filme, char fileira, int numero) throws Exception {
         String assento = fileira + String.valueOf(numero);
 

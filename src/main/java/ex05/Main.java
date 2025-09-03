@@ -6,45 +6,47 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Cinema cinema = new Cinema();
 
-        Filme filme01 = new Filme();
-        filme01.nome = "Velozes e Furiosos";
-        filme01.preco = 30.00;
-        filme01.idadeMinima = 16;
-
-        Filme filme02 = new Filme();
-        filme02.nome = "Barbie";
-        filme02.preco = 40.00;
-        filme02.idadeMinima = 14;
-
-        Filme filme03 = new Filme();
-        filme03.nome = "Interestellar";
-        filme03.preco = 50.00;
-        filme03.idadeMinima = 16;
-
-        cinema.filmesDisponiveis.add(filme01);
-        cinema.filmesDisponiveis.add(filme02);
-        cinema.filmesDisponiveis.add(filme03);
+        cinema.adicionarFilme(new Filme("Velozes e Furiosos", 30.00, 16));
+        cinema.adicionarFilme(new Filme("Barbie", 40.00, 14));
+        cinema.adicionarFilme(new Filme("Interestellar", 50.00, 16));
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Insira o nome do cliente: ");
-        String nomeCliente = scanner.nextLine();
+        while (true) {
+            try {
+                System.out.print("Insira o nome do cliente: ");
+                String nomeCliente = scanner.nextLine();
 
-        System.out.print("Insira a idade do cliente: ");
-        int idadeCliente = scanner.nextInt();
-        scanner.nextLine();
+                System.out.print("Insira a idade do cliente: ");
+                int idadeCliente = scanner.nextInt();
+                scanner.nextLine();
 
-        Cliente cliente = new Cliente(nomeCliente, idadeCliente);
+                Cliente cliente = new Cliente(nomeCliente, idadeCliente);
 
-        System.out.print("Insira o nome do filme: ");
-        String nomeFilme = scanner.nextLine();
+                System.out.print("Insira o nome do filme: ");
+                String nomeFilme = scanner.nextLine();
 
-        System.out.print("Insira o assento desejado: ");
-        String assento = scanner.nextLine();
-        char fileira = assento.charAt(0);
-        int numero = Integer.parseInt(assento.substring(1));
+                Filme filmeEscolhido = cinema.buscarFilme(nomeFilme);
+                if (filmeEscolhido == null) {
+                    System.out.println("Filme não disponível");
+                    continue;
+                }
 
-        Ingresso ingresso = new Ingresso(cliente, filme01, fileira, numero);
-        cinema.ingressosVendidos[0] = ingresso;
+                System.out.print("Insira o assento desejado: ");
+                String assento = scanner.nextLine().toUpperCase();
+                char fileira = assento.charAt(0);
+                int numero = Integer.parseInt(assento.substring(1));
+
+                cinema.venderIngresso(cliente, filmeEscolhido, fileira, numero);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            System.out.print("\nDeseja comprar outro ingresso? (s/n): ");
+            String opcao = scanner.nextLine();
+            if (!opcao.equalsIgnoreCase("s")) {
+                break;
+            }
+        }
     }
  }
